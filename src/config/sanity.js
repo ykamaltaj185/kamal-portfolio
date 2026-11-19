@@ -2,7 +2,7 @@ import { createClient } from '@sanity/client';
 import { createImageUrlBuilder } from '@sanity/image-url';
 
 export const sanityClient = createClient({
-    projectId: 'YOUR_PROJECT_ID', // Set to YOUR_PROJECT_ID to use local custom portfolio content
+    projectId: 'local-demo', // Valid format matching /^[a-z0-9-]+$/
     dataset: 'production',
     useCdn: true,
     apiVersion: '2024-03-01',
