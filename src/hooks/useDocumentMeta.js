@@ -12,28 +12,28 @@ import { useScene } from '../context/SceneContext';
 const ROOM_META = {
     null: {
         path: '/',
-        title: 'ITom — Creative 3D Portfolio',
-        description: 'Interactive 3D developer portfolio by Tomasz "ITom" Szmajda. Explore WebGL experiments, React projects & GSAP animations in a hand-drawn gallery.',
+        title: 'Kamal Taj — AI/ML Engineer Portfolio',
+        description: 'Interactive 3D portfolio of Yeraballi Kamal Taj. Explore GenAI projects, MLOps pipelines, and deep learning systems in an immersive 3D experience.',
     },
     about: {
         path: '/about',
-        title: 'About Me — ITom Portfolio',
-        description: 'Learn about Tomasz "ITom" Szmajda — a creative frontend developer specializing in 3D web experiences, React, Three.js, and GSAP animations.',
+        title: 'About Me — Kamal Taj Portfolio',
+        description: 'Learn about Yeraballi Kamal Taj — an AI/ML engineer specializing in GenAI, MLOps, LangChain, and deep learning systems.',
     },
     gallery: {
         path: '/gallery',
-        title: 'Gallery & Projects — ITom Portfolio',
-        description: 'Browse the interactive 3D gallery of web development projects by ITom. Each project is displayed as a hand-drawn card you can flip and explore.',
+        title: 'Projects — Kamal Taj Portfolio',
+        description: 'Browse the interactive 3D gallery of AI/ML projects by Kamal Taj. Each project is displayed as a hand-drawn card you can flip and explore.',
     },
     studio: {
         path: '/studio',
-        title: 'The Studio — ITom Portfolio',
-        description: 'Explore ITom\'s content studio — YouTube videos, blog posts, and TikToks displayed on floating monitors in an immersive 3D space.',
+        title: 'The Studio — Kamal Taj Portfolio',
+        description: 'Explore Kamal Taj\'s technical skills, projects, and certifications displayed on floating monitors in an immersive 3D space.',
     },
     contact: {
         path: '/contact',
-        title: 'Contact — ITom Portfolio',
-        description: 'Get in touch with Tomasz "ITom" Szmajda. Find social media links and contact information in this interactive 3D contact room.',
+        title: 'Contact — Kamal Taj Portfolio',
+        description: 'Get in touch with Yeraballi Kamal Taj. Find social media links and contact information in this interactive 3D contact room.',
     },
 };
 
@@ -82,17 +82,16 @@ export function useDocumentMeta() {
         if (ogDesc) ogDesc.setAttribute('content', meta.description);
 
         const ogUrl = document.querySelector('meta[property="og:url"]');
-        if (ogUrl) ogUrl.setAttribute('content', `https://itomdev.com${meta.path}`);
+        if (ogUrl) ogUrl.setAttribute('content', `${window.location.origin}${meta.path}`);
 
-        // Update canonical link to ensure virtual routes are correctly indexable as separate pages
+        // Update canonical link
         const canonicalTag = document.querySelector('link[rel="canonical"]');
         if (canonicalTag) {
-            canonicalTag.setAttribute('href', `https://itomdev.com${meta.path}`);
+            canonicalTag.setAttribute('href', `${window.location.origin}${meta.path}`);
         }
 
         // Push to browser history (only if not handling a popstate event and room actually changed)
         if (!isHandlingPopState.current && lastPushedRoom.current !== currentRoom) {
-            // Use replaceState for the very first load, pushState for subsequent navigations
             if (lastPushedRoom.current === undefined) {
                 window.history.replaceState({ room: currentRoom }, '', meta.path);
             } else {
@@ -112,13 +111,9 @@ export function useDocumentMeta() {
             lastPushedRoom.current = targetRoom;
 
             if (targetRoom === null) {
-                // Going back to corridor — we don't teleport, just need to trigger exit
-                // The SceneContext requestExit will handle the animation
-                // For now, we update meta immediately
                 const meta = ROOM_META['null'];
                 document.title = meta.title;
             } else if (hasEntered) {
-                // Teleport to the target room
                 teleportTo(targetRoom);
             }
         };

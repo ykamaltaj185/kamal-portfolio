@@ -352,7 +352,7 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
                 anchorY="middle"
                 font="/fonts/RubikScribble-Regular.ttf"
             >
-                TOMASZ SZMAJDA
+                YERABALLI KAMAL TAJ
             </Text>
 
             {/* Subtitle - Brand (spreads right) */}
@@ -365,7 +365,7 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
                 anchorY="middle"
                 font="/fonts/CabinSketch-Regular.ttf"
             >
-                (ITOM)
+                (KAMAL TAJ)
             </Text>
 
             {/* Avatar on cloud - floating + spreads up-left */}
@@ -390,7 +390,7 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
                 font="/fonts/CabinSketch-Regular.ttf"
                 fontStyle="italic"
             >
-                "Crafting digital experiences
+                "Building intelligent AI/ML
             </Text>
 
             {/* Motto - Line 2 (spreads left) */}
@@ -404,7 +404,7 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
                 font="/fonts/CabinSketch-Regular.ttf"
                 fontStyle="italic"
             >
-                that push creative boundaries"
+                systems that solve real problems"
             </Text>
         </group>
     );
@@ -417,15 +417,15 @@ const AWARDS_DATA = {
     featured: {
         id: 'award-featured',
         layout: 'certificate_grid',
-        title: 'Featured Projects Collection',
+        title: 'Certifications & Achievements',
         items: [
-            { label: 'Featured - Awwwards', date: 'May 2025', image: '/textures/about/FEATURED.webp', url: 'https://awwwards.com' },
-            { label: 'Featured - CSS Design Awards', date: 'June 2025', image: '/textures/about/FEATURED.webp', url: 'https://cssdesignawards.com' },
-            { label: 'Featured - The FWA', date: 'July 2025', image: '/textures/about/FEATURED.webp', url: 'https://thefwa.com' },
-            { label: 'Featured - Behance', date: 'August 2025', image: '/textures/about/FEATURED.webp', url: 'https://behance.net' },
+            { label: 'Python for Data Science - Infosys', date: '2025', image: '/textures/about/FEATURED.webp', url: 'https://www.linkedin.com/in/ykamaltaj/' },
+            { label: 'Power BI Business Scenarios - Udemy', date: '2024', image: '/textures/about/FEATURED.webp', url: 'https://www.linkedin.com/in/ykamaltaj/' },
+            { label: 'B.E. AI & ML - BNMIT (CGPA 9.41)', date: '2023-2027', image: '/textures/about/FEATURED.webp', url: 'https://www.linkedin.com/in/ykamaltaj/' },
+            { label: 'Intermediate - 93.15% (Telangana)', date: '2023', image: '/textures/about/FEATURED.webp', url: 'https://www.linkedin.com/in/ykamaltaj/' },
         ],
         platformConfig: {
-            label: 'HONOR',
+            label: 'CERTIFIED',
             color: '#1a1a1a',
             icon: '⭐'
         }
@@ -433,15 +433,14 @@ const AWARDS_DATA = {
     sotd: {
         id: 'award-sotd',
         layout: 'certificate_grid',
-        title: 'Site of the Day Awards',
+        title: 'Key Projects',
         items: [
-            { label: 'SOTD - GSAP', date: 'February 13, 2026', image: '/textures/about/SOTDAYYOUNGMULTIGSAP.webp', url: 'https://www.linkedin.com/posts/greensock_site-of-the-day-young-multi-this-immersive-activity-7427567524940017664-zU2n?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE3TV6UBqXoaJXUN5-1s3ij6SQJwTRAcbCM' },
-            { label: 'SOTD - CSS Winner', date: 'January 24, 2026', image: '/textures/about/SOTDAYYOUNGMULTICSSWINNER.webp', url: 'https://www.csswinner.com/details/young-multi-official-experience/19045' },
-            { label: 'SOTD - Orpetron', date: 'January 29, 2026', image: '/textures/about/SOTDAYYOUNGMULTIORPETRON.webp', url: 'https://orpetron.com/sites/young-multi/' },
-            { label: 'SOTD - Design Nominess', date: 'February 17, 2026', image: '/textures/about/SOTDAYYOUNGMULTIDESIGNNOMINESS.webp', url: 'https://www.designnominees.com/sites/young-multi' }
+            { label: 'Fraud Detection MLOps Platform', date: 'Jan-Feb 2026', image: '/textures/about/SOTDAYYOUNGMULTIGSAP.webp', url: 'https://github.com/ykamaltaj185' },
+            { label: 'LLM Multi-Agent RAG System', date: 'Dec 2025', image: '/textures/about/SOTDAYYOUNGMULTICSSWINNER.webp', url: 'https://github.com/ykamaltaj185' },
+            { label: 'Face Mask Detection System', date: 'May-Jul 2026', image: '/textures/about/SOTDAYYOUNGMULTIORPETRON.webp', url: 'https://github.com/ykamaltaj185' },
         ],
         platformConfig: {
-            label: 'AWARD',
+            label: 'PROJECT',
             color: '#1a1a1a',
             icon: '🏆'
         }
@@ -449,10 +448,10 @@ const AWARDS_DATA = {
     sotm: {
         id: 'award-sotm',
         layout: 'certificate_grid',
-        title: 'Site of the Month Awards',
+        title: 'Technical Skills',
         items: [],
         platformConfig: {
-            label: 'AWARD',
+            label: 'SKILL',
             color: '#1a1a1a',
             icon: '📅'
         }
@@ -460,12 +459,12 @@ const AWARDS_DATA = {
     other: {
         id: 'award-other',
         layout: 'certificate_grid',
-        title: 'Other Awards',
+        title: 'Education',
         items: [],
         platformConfig: {
-            label: 'PRESTIGE',
+            label: 'EDUCATION',
             color: '#1a1a1a',
-            icon: '👑'
+            icon: '🎓'
         }
     }
 };

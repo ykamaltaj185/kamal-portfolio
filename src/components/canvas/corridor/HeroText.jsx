@@ -54,20 +54,21 @@ const HeroText = ({ position = [0, 0.3, 0] }) => {
     // Pre-allocate Vector3 to avoid per-frame garbage collection
     const worldPosVec = useRef(new THREE.Vector3());
 
-    // Letter positions for ITOM split effect
+    // Letter positions for KAMAL split effect
     const letters = useMemo(() => [
-        { char: 'I', baseX: -0.95, splitDir: -1.6, delay: 0 },
-        { char: 'T', baseX: -0.43, splitDir: -0.6, delay: 0 },
-        { char: 'O', baseX: 0.23, splitDir: 0.6, delay: 0 },
-        { char: 'M', baseX: 0.95, splitDir: 1.8, delay: 0 },
+        { char: 'K', baseX: -1.5, splitDir: -1.6, delay: 0 },
+        { char: 'A', baseX: -0.75, splitDir: -0.8, delay: 0 },
+        { char: 'M', baseX: 0.0, splitDir: 0.0, delay: 0 },
+        { char: 'A', baseX: 0.75, splitDir: 0.8, delay: 0 },
+        { char: 'L', baseX: 1.5, splitDir: 1.6, delay: 0 },
     ], []);
 
     // Tagline words for split effect
     const taglineWords = useMemo(() => [
-        { text: '<', baseX: -0.85, splitDir: -1.5, delay: 0 },
-        { text: 'creative', baseX: -0.4, splitDir: -0.8, delay: 0 },
-        { text: 'developer', baseX: 0.4, splitDir: 0.8, delay: 0 },
-        { text: '/>', baseX: 0.85, splitDir: 1.5, delay: 0 },
+        { text: '<', baseX: -1.0, splitDir: -1.5, delay: 0 },
+        { text: 'AI/ML', baseX: -0.4, splitDir: -0.8, delay: 0 },
+        { text: 'engineer', baseX: 0.4, splitDir: 0.8, delay: 0 },
+        { text: '/>', baseX: 1.0, splitDir: 1.5, delay: 0 },
     ], []);
 
     // Animation loop
