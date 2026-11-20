@@ -60,7 +60,7 @@ function buildJsonLd() {
                 item: {
                     '@type': 'SoftwareApplication',
                     name: 'Fraud Detection MLOps Platform',
-                    description: 'Real-time fraud detection system using Isolation Forest, Apache Kafka, PostgreSQL, MLflow, Evidently AI, and Grafana.',
+                    description: "The platform is built in Python, using Apache Kafka for real-time transaction streaming and Scikit-Learn's Isolation Forest for millisecond anomaly scoring. PostgreSQL, Grafana, React UI, Evidently AI, MLflow, Airflow, FastAPI, and Docker Compose across 7 services.",
                     applicationCategory: 'Machine Learning Application',
                     operatingSystem: 'All',
                     url: 'https://github.com/ykamaltaj185'
@@ -72,7 +72,7 @@ function buildJsonLd() {
                 item: {
                     '@type': 'SoftwareApplication',
                     name: 'LLM-Powered Multi-Agent System with RAG',
-                    description: 'AI study assistant with hybrid RAG (FAISS + BM25 + CrossEncoder) and multi-agent architecture with dynamic task planning.',
+                    description: 'AI study assistant with Flask, Ollama local LLMs (phi3:mini) & embeddings (nomic-embed-text), FAISS vector DB, BM25 + CrossEncoder reranker, pypdf, Tesseract OCR, and LangChain agents.',
                     applicationCategory: 'Generative AI Application',
                     operatingSystem: 'All',
                     url: 'https://github.com/ykamaltaj185'
@@ -84,7 +84,7 @@ function buildJsonLd() {
                 item: {
                     '@type': 'SoftwareApplication',
                     name: 'Face Mask Detection System',
-                    description: 'CNN-based classifier with OpenCV Haar Cascade face detection and Flask web app for webcam inference.',
+                    description: 'CNN-based deep learning classifier with OpenCV Haar Cascade face detection and Flask web app for webcam inference.',
                     applicationCategory: 'Computer Vision Application',
                     operatingSystem: 'All',
                     url: 'https://github.com/ykamaltaj185'

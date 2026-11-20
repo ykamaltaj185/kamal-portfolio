@@ -418,12 +418,12 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
-            {/* EMAIL */}
+            {/* GMAIL */}
             <SocialBarrel
                 position={isMobile ? [1.2, 0.5, -10] : [3, 0.5, -10]}
                 rotation={[0, -0.2, 0]}
                 texturePath="/textures/contact/beczka.webp"
-                label="EMAIL"
+                label="GMAIL"
                 onClick={() => window.location.href = 'mailto:ykamaltaj01@gmail.com'}
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}

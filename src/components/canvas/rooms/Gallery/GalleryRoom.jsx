@@ -40,27 +40,24 @@ const FALLBACK_PROJECTS = [
         title: 'FRAUD DETECTION',
         front: '/textures/gallery/monetuneprzod.webp',
         painted: '/textures/gallery/monetuneprzod_painted.webp',
-        url: 'https://github.com/ykamaltaj185',
-        description: 'A real-time fraud detection MLOps platform using Isolation Forest anomaly detection, Apache Kafka for transaction streaming, PostgreSQL, MLflow for experiment tracking, Evidently AI for drift detection, and Grafana for visualization.',
-        techStack: ['/textures/gallery/csslogo.webp', '/textures/gallery/phplogo.webp', '/textures/gallery/htmllogo.webp', '/textures/gallery/jslogo.webp']
+        description: "The platform is built in Python, using Apache Kafka for real-time transaction streaming and Scikit-Learn's Isolation Forest for millisecond anomaly scoring. For storage and monitoring, we use PostgreSQL paired with Grafana and a React UI. On the MLOps side, we use Evidently AI for drift detection, MLflow for model versioning, and Apache Airflow for scheduled retraining workflows. The entire system is exposed via FastAPI and fully containerized across 7 services using Docker Compose.",
+        techStack: ['Python', 'Apache Kafka', 'Isolation Forest', 'FastAPI']
     },
     {
         id: 'llm-multiagent',
         title: 'LLM MULTI-AGENT',
         front: '/textures/gallery/timberkittyprzod.webp',
         painted: '/textures/gallery/timberkittyprzod_painted.webp',
-        url: 'https://github.com/ykamaltaj185',
-        description: 'An AI-powered study assistant with a hybrid RAG pipeline using FAISS vector search, BM25 keyword search, CrossEncoder reranking, and a multi-agent architecture with specialized AI agents, intent routing, and local LLMs via Ollama.',
-        techStack: ['/textures/gallery/jslogo.webp', '/textures/gallery/htmllogo.webp', '/textures/gallery/csslogo.webp', '/textures/gallery/phplogo.webp']
+        description: "Frontend: HTML + CSS + JavaScript • Backend: Flask (Python) • LLM: phi3:mini via Ollama (LOCAL) • Embeddings: nomic-embed-text via Ollama (LOCAL) • Vector DB: FAISS (in-memory) • Retrieval: FAISS + BM25 + CrossEncoder reranker • PDF Parsing: pypdf • OCR: Tesseract (pytesseract + Pillow) • Chunking: LangChain RecursiveCharacterTextSplitter + tiktoken • Agent Framework: LangChain (OllamaLLM)",
+        techStack: ['LangChain', 'Ollama (phi3)', 'FAISS + BM25', 'Flask (Python)']
     },
     {
         id: 'face-mask',
         title: 'MASK DETECTION',
         front: '/textures/gallery/youngmultiprzod.webp',
         painted: '/textures/gallery/youngmultiprzod_painted.webp',
-        url: 'https://github.com/ykamaltaj185',
-        description: 'A CNN-based deep learning model to classify faces into Mask and No Mask categories, with OpenCV Haar Cascade face detection and a Flask web application supporting image uploads and real-time webcam-based detection.',
-        techStack: ['/textures/gallery/reactlogo.webp', '/textures/gallery/tailwindlogo.webp', '/textures/gallery/htmllogo.webp', '/textures/gallery/netlifylogo.webp']
+        description: "Developed a CNN-based deep learning model to classify faces into Mask and No Mask categories. Implemented face detection using OpenCV Haar Cascade to identify face regions before classification. Built a Flask-based web application supporting image uploads and real-time webcam-based mask detection.",
+        techStack: ['OpenCV', 'Python', 'CNN', 'Flask']
     },
 ];
 
@@ -222,23 +219,6 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     const backTextureRaw = useTexture(canHover ? '/textures/gallery/tylkartki_painted.webp' : '/textures/gallery/tylkartki.webp');
     const overlayTextureRaw = useTexture(canHover ? '/textures/gallery/przyciskdotylukartki_painted.webp' : '/textures/gallery/przyciskdotylukartki.webp');
 
-    // Preload tech stack logos to prevent stuttering on first flip
-    // We use the same conditional logic: painted on desktop, regular on touch
-    const allLogos = useMemo(() => {
-        const names = [
-            'csslogo', 'elementorlogo', 'firebaselogo', 'htmllogo',
-            'jslogo', 'netlifylogo', 'phplogo', 'reactlogo',
-            'tailwindlogo', 'wordpresslogo'
-        ];
-        return names.map(name => {
-            if (!canHover) return `/textures/gallery/${name}.webp`;
-            if (name === 'csslogo') return `/textures/gallery/css3logo_painted.webp`;
-            return `/textures/gallery/${name}_painted.webp`;
-        });
-    }, [canHover]);
-    
-    useTexture(allLogos);
-
     // Construct the full list of projects (repeated) with textures attached
     const projects = useMemo(() => {
         return Array.from({ length: PROJECT_COUNT }).map((_, i) => {
@@ -252,7 +232,6 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
             // Configure textures
             if (frontTex) {
                 frontTex.colorSpace = THREE.SRGBColorSpace;
-                // frontTex.encoding = THREE.sRGBEncoding;
             }
             if (paintedTex) {
                 paintedTex.colorSpace = THREE.SRGBColorSpace;
@@ -264,14 +243,6 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 overlayTextureRaw.colorSpace = THREE.SRGBColorSpace;
             }
 
-            // Map tech stack logos to the correct version (painted or regular)
-            const techStack = projectData.techStack.map(path => {
-                if (!canHover) return path; // Keep regular
-                const name = path.split('/').pop().replace('.webp', '');
-                if (name === 'csslogo') return '/textures/gallery/css3logo_painted.webp';
-                return `/textures/gallery/${name}_painted.webp`;
-            });
-
             return {
                 ...projectData,
                 index: i,
@@ -279,7 +250,7 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 paintedTexture: (paintedTex !== frontTex && canHover) ? paintedTex : null,
                 backTexture: backTextureRaw,
                 buttonTexture: overlayTextureRaw,
-                techStack: techStack
+                techStack: projectData.techStack
             };
         });
     }, [projectTextures, backTextureRaw, overlayTextureRaw]);
@@ -689,9 +660,7 @@ const ProjectCard = memo(forwardRef(({ index, project, clothespinTexture, curren
     const detailsTextRef1 = useRef();
     const detailsTextRef2 = useRef();
     const techTextRef = useRef();
-    const openTextRef = useRef();
     const [hovered, setHovered] = useState(false);
-    const [btnHovered, setBtnHovered] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);  // True ONLY during flip animation
     const [isScrolling, setIsScrolling] = useState(false);  // True during scroll phase
 
@@ -923,15 +892,13 @@ const ProjectCard = memo(forwardRef(({ index, project, clothespinTexture, curren
 
     // Cursor change on hover
     useEffect(() => {
-        if (btnHovered && isSelected) {
-            document.body.style.cursor = 'pointer';
-        } else if (hovered && !isSelected) {
+        if (hovered && !isSelected) {
             document.body.style.cursor = 'pointer';
         } else {
             document.body.style.cursor = 'auto';
         }
         return () => { document.body.style.cursor = 'auto'; };
-    }, [hovered, isSelected, btnHovered]);
+    }, [hovered, isSelected]);
 
     useFrame((state) => {
         if (!cardRef.current) return;
@@ -957,7 +924,6 @@ const ProjectCard = memo(forwardRef(({ index, project, clothespinTexture, curren
                 applyOpacity(detailsTextRef1);
                 applyOpacity(detailsTextRef2);
                 applyOpacity(techTextRef);
-                applyOpacity(openTextRef);
             }
         }
 
@@ -977,31 +943,6 @@ const ProjectCard = memo(forwardRef(({ index, project, clothespinTexture, curren
             // Obrót tekstu by przylegał do krzywizny (pochodna dz/dy)
             const dz_dy = 2.0 * y * uBend + 2.0 * Math.cos(uTime * 2.0 + y * 2.0) * totalWind * (1.0 + Math.abs(uBend * 3.0));
             textRef.current.rotation.x = Math.atan(dz_dy);
-        }
-
-        // --- Zrównaj pozycję przycisku Z z animacją pleców (TYŁ) ---
-        if (buttonGroupRef.current && materialRef.current) {
-            const y = buttonGroupRef.current.position.y;
-            const uBend = materialRef.current.bend;
-            const uWindStrength = materialRef.current.windStrength || 0;
-            const uTime = state.clock.getElapsedTime();
-
-            const bendAmount = Math.pow(y, 2.0) * uBend;
-            const totalWind = 0.02 + uWindStrength;
-            const flutter = Math.sin(uTime * 2.0 + y * 2.0) * totalWind * (1.0 + Math.abs(uBend * 3.0));
-
-            // PAMIĘTAJ! Cała płaszczyzna zgina się w przód (+Z względem rodzica).
-            // A że my jesteśmy PO ZEWNĘTRZNEJ stronie (z tyłu pleców), chcemy być ułamek za płaszczyzną, np -0.03
-            // Wcześniej omyłkowo odwróciłem znak całego równania ( -(bendAmount...) ), co odwróciło falowanie. Prawidłowo jest tak:
-            buttonGroupRef.current.position.z = bendAmount + flutter - 0.03;
-
-            // Obrót przycisku by przylegał do krzywizny, będąc po przeciwnej stronie (dodatkowe odwrócenie o Pi)
-            const dz_dy = 2.0 * y * uBend + 2.0 * Math.cos(uTime * 2.0 + y * 2.0) * totalWind * (1.0 + Math.abs(uBend * 3.0));
-            buttonGroupRef.current.rotation.x = Math.PI + Math.atan(dz_dy);
-
-            // Hover animacja powiększania dla przycisku (napis się powiększa)
-            const targetScale = btnHovered ? 1.08 : 1;
-            buttonGroupRef.current.scale.lerp(_tempScale.set(targetScale, targetScale, 1), 0.15);
         }
 
         // --- Zrównaj pozycję górnego opisu (PROJECT DETAILS) ---
@@ -1133,73 +1074,16 @@ const ProjectCard = memo(forwardRef(({ index, project, clothespinTexture, curren
                     />
                 </mesh>
 
-                {/* === PRZYCISK: OPEN NA PLECACH KARTKI === */}
-                <group
-                    ref={buttonGroupRef}
-                    position={[0, 0.75, 0]}
-                    rotation={[Math.PI, 0, 0]}
-                >
-                    {/* Warstwa 1: Wizualna ramka przycisku (bez eventów) */}
-                    <mesh>
-                        <planeGeometry args={[1.2, 1.2 / 3.613]} />
-                        <meshBasicMaterial color="#ffffff"
-                            map={project.buttonTexture}
-                            transparent={true}
-                            alphaTest={0.05}
-                        />
-                    </mesh>
-
-                    {/* Warstwa 2: Napis OPEN PROJECT (bez eventów) */}
-                    <Text
-                        ref={openTextRef}
-                        position={[0, 0, 0.01]}
-                        fontSize={0.11}
-                        color={btnHovered ? "#333333" : "#1c1c1c"}
-                        font="/fonts/CabinSketch-Bold.ttf"
-                        anchorX="center"
-                        anchorY="middle"
-                        fillOpacity={0} // Start hidden
-                    >
-                        OPEN PROJECT
-                    </Text>
-
-                    {/* Warstwa 3: Niewidoczny hit-area pokrywający cały przycisk - łapie WSZYSTKIE eventy */}
-                    <mesh
-                        position={[0, 0, 0.02]}
-                        onClick={(e) => {
-                            if (isSelected && !isTransitioning) {
-                                e.stopPropagation();
-                                window.open(project.url, '_blank');
-                            }
-                        }}
-                        onPointerEnter={(e) => {
-                            if (isSelected && !isTransitioning) {
-                                e.stopPropagation();
-                                setBtnHovered(true);
-                            }
-                        }}
-                        onPointerLeave={(e) => {
-                            if (isSelected && !isTransitioning) {
-                                e.stopPropagation();
-                            }
-                            setBtnHovered(false);
-                        }}
-                    >
-                        <planeGeometry args={[1.2, 1.2 / 3.613]} />
-                        <meshBasicMaterial color="#e0e0e0" transparent={true} opacity={0} />
-                    </mesh>
-                </group>
-
                 {/* === TEKST NA PLECACH KARTKI (PROJECT DETAILS) === */}
                 <group
                     ref={detailsGroupRef}
-                    position={[0, -0.5, 0]} // Miejsce u góry (gdy Y=0.75 to dół, to Y=-0.4 to góra)
+                    position={[0, -0.62, 0]}
                     rotation={[Math.PI, 0, 0]}
                 >
                     <Text
                         ref={detailsTextRef1}
-                        position={[0, 0.28, 0.01]} // Względem środka detailsGroupRef, wyżej
-                        fontSize={0.10}
+                        position={[0, 0.40, 0.01]}
+                        fontSize={0.08}
                         color="#1c1c1c"
                         font="/fonts/CabinSketch-Bold.ttf"
                         anchorX="center"
@@ -1211,31 +1095,31 @@ const ProjectCard = memo(forwardRef(({ index, project, clothespinTexture, curren
 
                     <Text
                         ref={detailsTextRef2}
-                        position={[0, 0.2, 0.01]} // Poniżej nagłówka
-                        fontSize={0.06}
+                        position={[0, 0.32, 0.01]}
+                        fontSize={0.043}
                         color="#333333"
                         font="/fonts/CabinSketch-Bold.ttf"
                         anchorX="center"
                         anchorY="top"
-                        maxWidth={1.1} // Maksymalna szerokość zanim zacznie łamać linie
-                        lineHeight={1.4}
+                        maxWidth={1.22}
+                        lineHeight={1.25}
                         textAlign="center"
                         fillOpacity={0} // Start hidden
                     >
-                        {project.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco."}
+                        {project.description}
                     </Text>
                 </group>
 
                 {/* === SEKCJA TECH STACK NA PLECACH KARTKI === */}
                 <group
                     ref={techStackGroupRef}
-                    position={[0, 0.30, 0]} // Pomiędzy Project Details a przyciskiem Open Project
+                    position={[0, 0.42, 0]}
                     rotation={[Math.PI, 0, 0]}
                 >
                     <Text
                         ref={techTextRef}
-                        position={[0, 0.15, 0.01]}
-                        fontSize={0.08}
+                        position={[0, 0.17, 0.01]}
+                        fontSize={0.075}
                         color="#1c1c1c"
                         font="/fonts/CabinSketch-Bold.ttf"
                         anchorX="center"
@@ -1245,16 +1129,16 @@ const ProjectCard = memo(forwardRef(({ index, project, clothespinTexture, curren
                         TECH STACK
                     </Text>
 
-                    {/* Kontener na loga układane poziomo */}
-                    <group position={[0, -0.05, 0.01]}>
-                        {project.techStack && project.techStack.map((logoPath, idx) => {
-                            // Rozstawienie kwadracików (4 sztuki wyśrodkowane)
-                            const spacing = 0.30;
-                            const startX = -((project.techStack.length - 1) * spacing) / 2;
-                            const xPos = startX + (idx * spacing);
+                    {/* Kontener na badges układane w siatce 2x2 */}
+                    <group position={[0, -0.01, 0.01]}>
+                        {project.techStack && project.techStack.map((techName, idx) => {
+                            const row = Math.floor(idx / 2);
+                            const col = idx % 2;
+                            const xPos = col === 0 ? -0.32 : 0.32;
+                            const yPos = row === 0 ? 0.04 : -0.09;
 
                             return (
-                                <TechStackLogo key={idx} path={logoPath} position={[xPos, 0, 0]} />
+                                <TechStackBadge key={idx} text={techName} position={[xPos, yPos, 0]} />
                             );
                         })}
                     </group>
@@ -1339,18 +1223,46 @@ const RightSideHouses = ({ texture, baseWidth, baseHeight, cropAmount }) => {
     );
 };
 
-// Sub-component for individual tech stack logos
-const TechStackLogo = ({ path, position }) => {
-    const texture = useTexture(path);
-
+// Sub-component for individual tech stack text badge
+const TechStackBadge = ({ text, position }) => {
     return (
-        <mesh position={position}>
-            <planeGeometry args={[0.17, 0.17]} />
-            <meshBasicMaterial color="#ffffff"
-                map={texture}
-                transparent={true}
-            />
-        </mesh>
+        <group position={position}>
+            {/* Soft paper pill background */}
+            <mesh position={[0, 0, 0]}>
+                <planeGeometry args={[0.58, 0.105]} />
+                <meshBasicMaterial color="#f4efe6" transparent opacity={0.92} side={THREE.DoubleSide} />
+            </mesh>
+            {/* Outline border */}
+            <lineLoop position={[0, 0, 0.005]}>
+                <bufferGeometry>
+                    <float32BufferAttribute
+                        attach="attributes-position"
+                        count={4}
+                        array={new Float32Array([
+                            -0.29, -0.052, 0,
+                             0.29, -0.052, 0,
+                             0.29,  0.052, 0,
+                            -0.29,  0.052, 0,
+                        ])}
+                        itemSize={3}
+                    />
+                </bufferGeometry>
+                <lineBasicMaterial color="#333333" transparent opacity={0.5} />
+            </lineLoop>
+            {/* Tech Name */}
+            <Text
+                position={[0, 0, 0.01]}
+                fontSize={0.038}
+                color="#111111"
+                font="/fonts/CabinSketch-Bold.ttf"
+                anchorX="center"
+                anchorY="middle"
+                maxWidth={0.56}
+                textAlign="center"
+            >
+                {text}
+            </Text>
+        </group>
     );
 };
 

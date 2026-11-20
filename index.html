@@ -125,18 +125,16 @@
         <section>
           <h3>Fraud Detection MLOps Platform</h3>
           <p>
-            A real-time fraud detection system using Isolation Forest to identify suspicious financial transactions through anomaly detection.
-            Integrated Apache Kafka for real-time transaction streaming and Python-based consumers for automated fraud scoring.
-            Built with PostgreSQL, MLflow, Evidently AI, and Grafana for data storage, experiment tracking, monitoring, and visualization. (Jan 2026 – Feb 2026)
+            The platform is built in Python, using Apache Kafka for real-time transaction streaming and Scikit-Learn's Isolation Forest for millisecond anomaly scoring.
+            For storage and monitoring, we use PostgreSQL paired with Grafana and a React UI. On the MLOps side, we use Evidently AI for drift detection, MLflow for model versioning, and Apache Airflow for scheduled retraining workflows.
+            The entire system is exposed via FastAPI and fully containerized across 7 services using Docker Compose. (Jan 2026 – Feb 2026)
           </p>
         </section>
 
         <section>
           <h3>LLM-Powered Multi-Agent System with RAG</h3>
           <p>
-            An AI-powered study assistant that processes PDF documents and images to provide summaries, explanations, quizzes, and doubt resolution.
-            Implemented a RAG pipeline using text chunking, embeddings, FAISS vector search, BM25 keyword search, and CrossEncoder reranking for accurate information retrieval.
-            Designed a multi-agent architecture with specialized AI agents, intent routing, and dynamic task planning. (Dec 2025)
+            An AI-powered study assistant with hybrid RAG and multi-agent planning. Frontend: HTML, CSS, JavaScript • Backend: Flask (Python) • LLM: phi3:mini via Ollama (LOCAL) • Embeddings: nomic-embed-text via Ollama (LOCAL) • Vector DB: FAISS (in-memory) • Retrieval: FAISS + BM25 + CrossEncoder reranker • PDF Parsing: pypdf • OCR: Tesseract (pytesseract + Pillow) • Chunking: LangChain RecursiveCharacterTextSplitter + tiktoken • Agent Framework: LangChain (OllamaLLM). (Dec 2025)
           </p>
         </section>
 
