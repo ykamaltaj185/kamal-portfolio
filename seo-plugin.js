@@ -24,7 +24,8 @@ function buildJsonLd() {
         },
         sameAs: [
             'https://www.linkedin.com/in/ykamaltaj',
-            'https://github.com/ykamaltaj185'
+            'https://github.com/ykamaltaj185',
+            'https://www.instagram.com/kamali.697'
         ]
     };
     graph.push(person);

@@ -921,7 +921,6 @@ const ProjectCard = memo(forwardRef(({ index, project, clothespinTexture, curren
                     }
                 };
                 applyOpacity(textRef);
-                applyOpacity(detailsTextRef1);
                 applyOpacity(detailsTextRef2);
                 applyOpacity(techTextRef);
             }
@@ -1074,35 +1073,22 @@ const ProjectCard = memo(forwardRef(({ index, project, clothespinTexture, curren
                     />
                 </mesh>
 
-                {/* === TEKST NA PLECACH KARTKI (PROJECT DETAILS) === */}
+                {/* === OPIS PROJEKTU W ŚRODKU GÓRNEJ RAMKI === */}
                 <group
                     ref={detailsGroupRef}
-                    position={[0, -0.62, 0]}
+                    position={[0, -0.42, 0]}
                     rotation={[Math.PI, 0, 0]}
                 >
                     <Text
-                        ref={detailsTextRef1}
-                        position={[0, 0.40, 0.01]}
-                        fontSize={0.08}
+                        ref={detailsTextRef2}
+                        position={[0, 0, 0.01]}
+                        fontSize={0.038}
                         color="#1c1c1c"
                         font="/fonts/CabinSketch-Bold.ttf"
                         anchorX="center"
                         anchorY="middle"
-                        fillOpacity={0} // Start hidden
-                    >
-                        PROJECT DETAILS:
-                    </Text>
-
-                    <Text
-                        ref={detailsTextRef2}
-                        position={[0, 0.32, 0.01]}
-                        fontSize={0.043}
-                        color="#333333"
-                        font="/fonts/CabinSketch-Bold.ttf"
-                        anchorX="center"
-                        anchorY="top"
-                        maxWidth={1.22}
-                        lineHeight={1.25}
+                        maxWidth={1.06}
+                        lineHeight={1.30}
                         textAlign="center"
                         fillOpacity={0} // Start hidden
                     >
